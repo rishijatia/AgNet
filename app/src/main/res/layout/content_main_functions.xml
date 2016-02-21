@@ -9,15 +9,27 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.wisc.agnet.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="edu.wisc.agnet.MainFunctions"
+    tools:showIn="@layout/activity_main_functions">
 
-    <com.climate.login.LoginButton
-        android:id="@+id/login"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:text="Map Data Analysis"
+        android:id="@+id/mapButton"
+        android:layout_marginTop="95dp"
+        android:onClick="callMapActivity"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:id="@+id/dataBtn"
+        android:onClick="loadData"
+        android:layout_below="@+id/mapButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp" />
 
 </RelativeLayout>

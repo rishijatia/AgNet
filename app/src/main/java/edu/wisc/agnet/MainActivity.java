@@ -1,5 +1,6 @@
 package edu.wisc.agnet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,43 +11,33 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
+//import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.climate.login.LoginButton;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements LoginButton.LoginListener {
 
     private static final String TAG = "MainActivity";
-    TextView textView;
+
+    //TextView textView;
+    static JSONObject ssn;
+    static JSONObject data;
+    public static StringBuilder stringBuilder;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        textView= (TextView) findViewById(R.id.textView);
         LoginButton loginButton = (LoginButton) findViewById(R.id.login);
         loginButton.registerListener(this);
         loginButton.setCredentials("dpdus1aoi0k55b", "933to8vvii2pgf6oq6sv1lf22d");
@@ -77,33 +68,34 @@ public class MainActivity extends AppCompatActivity implements LoginButton.Login
     @Override
     public void onLogin(final JSONObject session) {
 
-
+        ssn=session;
+        Log.d("SSN",ssn.toString());
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, "https://hackillinois.climate.com/api/fields", null, new Response.Listener<JSONObject>() {
+                (com.android.volley.Request.Method.GET, "https://hackillinois.climate.com/api/fields", null, new com.android.volley.Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        data=response;
                         Log.d(TAG, "fields: ");
                         try {
                             Log.d(TAG, response.toString(2));
                             if(response.has("error")) {
-                                textView.setText(response.optString("error_description"));
+                                //textView.setText(response.optString("error_description"));
                             } else {
                                 JSONArray fields = response.optJSONArray("fields");
-                                StringBuilder stringBuilder = new StringBuilder("Fields:\n\n");
+                                stringBuilder = new StringBuilder("Fields:\n\n");
                                 for (int i = 0; i < fields.length(); ++i) {
                                     stringBuilder.append(fields.optJSONObject(i).optString("name"));
                                     stringBuilder.append("\n");
                                     stringBuilder.append(fields.optJSONObject(i).optJSONObject("centroid").optJSONArray("coordinates").toString());
                                     stringBuilder.append("\n");
                                 }
-                                textView.setText(stringBuilder.toString());
                             }
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener() {
+                }, new com.android.volley.Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -125,11 +117,15 @@ public class MainActivity extends AppCompatActivity implements LoginButton.Login
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jsObjRequest);
 
+        Intent intent=new Intent(this, MainFunctions.class);
+        startActivity(intent);
+
     }
 
     @Override
     public void onError(Exception exception) {
 
     }
+
 }
 
