@@ -84,7 +84,7 @@ public class MapActivity extends AppCompatActivity {
         String name = MainActivity.data.optJSONArray("fields").optJSONObject(0).optString("name");
         Marker davao = map.addMarker(new MarkerOptions().position(center1).title(name));
 
-
+int col2=0x55ff0000;
         latlng=MainActivity.data.optJSONArray("fields").optJSONObject(1).optJSONObject("centroid").optJSONArray("coordinates").toString();
         String lat2 =latlng.substring(1, latlng.indexOf(','));
         lat2=lat2.trim();
@@ -93,14 +93,20 @@ public class MapActivity extends AppCompatActivity {
         LatLng center2 = new LatLng(Double.parseDouble(lng2),Double.parseDouble(lat2));
         String name2 = MainActivity.data.optJSONArray("fields").optJSONObject(1).optString("name");
         Marker davao2 = map.addMarker(new MarkerOptions().position(center2).title(name2));
+        try {
+            if (Double.parseDouble(DataActivity.zWeatherData.getJSONObject("current_observation").optString("temp_c")) <20)
+                col2=0x5500ff00;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         CircleOptions circleOptions1 = new CircleOptions()
                 .center(new LatLng(Double.parseDouble(lng2),Double.parseDouble(lat2)))
                 .radius(1000);
-        circleOptions1.fillColor(0x55ff0000);
+        circleOptions1.fillColor(col2);
         circleOptions1.visible(true);
         circleOptions1.strokeColor(Color.TRANSPARENT);
         Circle circle1 = map.addCircle(circleOptions1);
-
+int col3 = 0x55ff0000;
         latlng=MainActivity.data.optJSONArray("fields").optJSONObject(2).optJSONObject("centroid").optJSONArray("coordinates").toString();
         String lat3 =latlng.substring(1, latlng.indexOf(','));
         lat3=lat3.trim();
@@ -109,11 +115,17 @@ public class MapActivity extends AppCompatActivity {
         LatLng center3 = new LatLng(Double.parseDouble(lng3),Double.parseDouble(lat3));
         String name3 = MainActivity.data.optJSONArray("fields").optJSONObject(2).optString("name");
         Marker davao3 = map.addMarker(new MarkerOptions().position(center3).title(name3));
+        try {
+            if (Double.parseDouble(DataActivity.zWeatherData.getJSONObject("current_observation").optString("temp_c")) <20)
+                col3=0x5500ff00;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         CircleOptions circleOptions2 = new CircleOptions()
                 .center(new LatLng(Double.parseDouble(lng3),Double.parseDouble(lat3)))
                 .radius(1000);
         circleOptions2.strokeColor(Color.TRANSPARENT);
-        circleOptions2.fillColor(0x55ff0000);
+        circleOptions2.fillColor(col3);
         circleOptions2.visible(true);
         Circle circle2 = map.addCircle(circleOptions2);
 

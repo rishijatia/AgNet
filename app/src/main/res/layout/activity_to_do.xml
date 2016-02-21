@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#71BCFA"
+        android:padding="6dip"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="217dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="2dp"
+            android:text="The Marketplace"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="right" />
+
+        <EditText
+           android:id="@+id/textNewToDo"
+           android:layout_width="275dp"
+           android:layout_height="42dp"
+            android:ems="10"
+           android:hint="Field to be Bought or Sold">
+
+           <requestFocus />
+      </EditText>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonDeleteToDo"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:onClick="deleteItem"
+                android:text="Buy"
+                android:layout_gravity="right" />
+
+            <Button
+                android:id="@+id/buttonAddToDo"
+                android:layout_width="182dp"
+                android:layout_height="wrap_content"
+                android:onClick="addItem"
+                android:text="Sell" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#71BCFA"
+        android:padding="6dip"
+         android:orientation="vertical">
+
+         <Button
+             android:id="@+id/buttonGetToDo"
+             android:layout_width="353dp"
+             android:layout_height="wrap_content"
+             android:onClick="getItem"
+             android:text="Goods on Sale" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listViewToDo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/row_list_to_do" 
+        android:padding="6dip"
+        android:background="#ffffff">
+
+    </ListView>
+
+</LinearLayout>

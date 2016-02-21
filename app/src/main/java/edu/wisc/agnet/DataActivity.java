@@ -1,6 +1,7 @@
 package edu.wisc.agnet;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class DataActivity extends AppCompatActivity {
         }catch(Exception ex){
             Log.d("Error", ex.getMessage());
         }
-
+        textView.setTextColor(Color.WHITE);
 
 //        Log.d("DONE",MainActivity.ssn.toString());
         //textView.setText(weatherData.toString());
@@ -53,18 +54,18 @@ public class DataActivity extends AppCompatActivity {
         if (zWeatherData != null) {
             Log.d("Run", "Is textView null? : " + (((DataActivity) this).textView == null));
            // textView.setText(zWeatherData.getJSONObject("current_observation").optString("temp_c"));
-            currentTemp=zWeatherData.getJSONObject("current_observation").optString("temp_c");
+            currentTemp=zWeatherData.getJSONObject("current_observation").optString("temp_c")+" Celsius";
 
-            stringBuilder=new StringBuilder("Farmer Details \n \n");
+            stringBuilder=new StringBuilder("Farmer Details \n \n\n");
             stringBuilder.append("First Name: "+MainActivity.ssn.optJSONObject("user").optString("firstname"));
-            stringBuilder.append("\n");
+            stringBuilder.append("\n\n");
             stringBuilder.append("Last Name: "+MainActivity.ssn.optJSONObject("user").optString("lastname"));
-            stringBuilder.append("\n");
+            stringBuilder.append("\n\n");
             stringBuilder.append("E-mail: "+MainActivity.ssn.optJSONObject("user").optString("email"));
-            stringBuilder.append("\n");
+            stringBuilder.append("\n\n");
             stringBuilder.append("Farmer ID: "+MainActivity.ssn.optJSONObject("user").optString("id"));
-            stringBuilder.append("\n");
-            stringBuilder.append("Current Temperature: "+currentTemp);
+            stringBuilder.append("\n\n");
+            stringBuilder.append("Current Temperature at Farm: "+currentTemp);
             if (textView!=null && stringBuilder!=null)
             textView.setText(stringBuilder);
         }

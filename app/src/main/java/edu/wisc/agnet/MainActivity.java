@@ -1,6 +1,7 @@
 package edu.wisc.agnet;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoginButton.Login
 
     private static final String TAG = "MainActivity";
 
-    //TextView textView;
+    TextView textView2;
     static JSONObject ssn;
     static JSONObject data;
     public static StringBuilder stringBuilder;
@@ -36,12 +37,11 @@ public class MainActivity extends AppCompatActivity implements LoginButton.Login
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         LoginButton loginButton = (LoginButton) findViewById(R.id.login);
         loginButton.registerListener(this);
         loginButton.setCredentials("dpdus1aoi0k55b", "933to8vvii2pgf6oq6sv1lf22d");
-
+        textView2=(TextView) findViewById(R.id.textView2);
+        textView2.setTextColor(Color.WHITE);
     }
 
     @Override
